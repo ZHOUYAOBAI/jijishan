@@ -135,6 +135,66 @@
     });
   });
 
+  /* ---------- 施工实拍：点击放大 + 左右切换 ---------- */
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.work-card'));
+    var lb = document.getElementById('lb');
+    if (!cards.length || !lb) return;
+
+    var img = document.getElementById('lbImg');
+    var cap = document.getElementById('lbCap');
+    var idx = 0;
+    var lastFocus = null;
+
+    function show(i) {
+      idx = (i + cards.length) % cards.length;
+      var card = cards[idx];
+      var pic = card.querySelector('img');
+      if (!pic) return;
+      img.src = pic.getAttribute('src');
+      img.alt = pic.getAttribute('alt') || '';
+      cap.textContent = card.getAttribute('data-cap') || '';
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hide() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+      img.removeAttribute('src');
+      if (lastFocus) lastFocus.focus();
+    }
+
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function () {
+        lastFocus = card;
+        show(i);
+      });
+    });
+
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb || (e.target.closest && e.target.closest('.lb__close'))) hide();
+    });
+    lb.querySelector('.lb__prev').addEventListener('click', function () { show(idx - 1); });
+    lb.querySelector('.lb__next').addEventListener('click', function () { show(idx + 1); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') hide();
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+      else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+
+    var sx = 0;
+    lb.addEventListener('touchstart', function (e) {
+      sx = e.touches[0].clientX;
+    }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
+
   /* ---------- 年份 ---------- */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>九原门窗服务 · 微信服务卡</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#eef2f5}
+  body{width:750px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+  .card{width:750px;background:linear-gradient(168deg,#0c4370 0%,#083453 42%,#062a45 100%);color:#fff;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;width:560px;height:560px;right:-220px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(42,139,208,.35),transparent 70%)}
+  .inner{position:relative;padding:52px 42px 0}
+
+  /* 品牌 */
+  .brand{display:flex;align-items:center;gap:16px}
+  .mark{width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .mark svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:1.7}
+  .brand strong{display:block;font-size:31px;font-weight:800;letter-spacing:.5px}
+  .brand span{display:block;font-size:19px;color:rgba(255,255,255,.66);margin-top:4px;letter-spacing:.4px}
+
+  /* 主标题 */
+  h1{font-size:62px;line-height:1.24;font-weight:800;letter-spacing:1px;margin-top:34px}
+  h1 em{font-style:normal;color:#ffbe8c}
+  .services{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .services span{font-size:21px;font-weight:600;padding:9px 18px;border-radius:100px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.94)}
+
+  /* 三大承诺 */
+  .promise{display:flex;margin-top:34px;padding:22px 0;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16)}
+  .promise div{flex:1;text-align:center;position:relative}
+  .promise div+div::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:rgba(255,255,255,.16)}
+  .promise b{display:block;font-size:25px;font-weight:800;color:#fff;letter-spacing:.5px}
+  .promise i{display:block;font-style:normal;font-size:17px;color:rgba(255,255,255,.58);margin-top:6px;letter-spacing:.3px}
+
+  /* 实拍 */
+  .shots{display:flex;gap:10px;margin-top:30px}
+  .shots figure{flex:1;margin:0;position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.18)}
+  .shots img{width:100%;height:236px;object-fit:cover;display:block}
+  .shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 9px;font-size:16px;font-weight:600;color:#fff;background:linear-gradient(180deg,transparent,rgba(4,20,34,.9))}
+
+  /* 电话 */
+  .contact{margin-top:32px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:26px 26px 22px;display:flex;align-items:center;gap:24px}
+  .contact__main{flex:1}
+  .contact__hint{font-size:19px;color:rgba(255,255,255,.62);letter-spacing:.5px;margin-bottom:16px}
+  .person{display:flex;align-items:baseline;gap:14px;padding:7px 0}
+  .person em{font-style:normal;font-size:22px;color:rgba(255,255,255,.8);flex:0 0 auto}
+  .person b{font-size:47px;font-weight:800;letter-spacing:1px;line-height:1.15;color:#ffb27a}
+  .contact__qr{flex:0 0 auto;text-align:center;width:132px}
+  .contact__qr img{width:132px;height:132px;background:#fff;padding:7px;border-radius:12px;display:block}
+  .contact__qr span{display:block;font-size:15px;color:rgba(255,255,255,.6);margin-top:8px;letter-spacing:.3px}
+
+  /* 底 */
+  .foot{margin-top:28px;padding:20px 0 34px;border-top:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:space-between;font-size:18px;color:rgba(255,255,255,.62);letter-spacing:.4px}
+  .foot b{color:#fff;font-weight:700}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="inner">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg>
+      </div>
+      <div>
+        <strong>九原门窗服务</strong>
+        <span>包头市九原区 · 本地专业老师傅直营</span>
+      </div>
+    </div>
+
+    <h1>门窗的事<br>找本地师傅<em>一次办妥</em></h1>
+
+    <div class="services">
+      <span>断桥铝门窗</span><span>金刚纱窗</span><span>窗户漏风维修</span><span>换漏气玻璃</span>
+    </div>
+
+    <div class="promise">
+      <div><b>没有中间商</b><i>电话就是师傅接</i></div>
+      <div><b>质量保证</b><i>材料工序自己验</i></div>
+      <div><b>本地老师傅</b><i>九原就近上门</i></div>
+    </div>
+
+    <div class="shots">
+      <figure><img src="../assets/img/works/w03-level.webp" alt="师傅在窗边施工"><figcaption>现场找正</figcaption></figure>
+      <figure><img src="../assets/img/works/w06-seal.webp" alt="师傅给窗框打胶"><figcaption>框周打胶</figcaption></figure>
+      <figure><img src="../assets/img/works/w09-living.webp" alt="装好的客厅大窗"><figcaption>完工实拍</figcaption></figure>
+    </div>
+
+    <div class="contact">
+      <div class="contact__main">
+        <div class="contact__hint">打电话，师傅直接约上门量尺</div>
+        <div class="person"><em>吉继山</em><b>15147291185</b></div>
+        <div class="person"><em>刘红侠</em><b>18247359113</b></div>
+      </div>
+      <div class="contact__qr">
+        <img src="qr-site.png" alt="扫码看施工实拍">
+        <span>扫码看实拍</span>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span><b>包头市九原区</b> · 没有中间商 · 质量保证</span>
+      <span>存图 / 转发都行</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
