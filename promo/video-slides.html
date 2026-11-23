@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>宣传视频画面</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#062a45}
+  .slide{position:relative;width:1080px;height:1920px;overflow:hidden;color:#fff;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:linear-gradient(168deg,#0d4574 0%,#083453 46%,#062a45 100%);
+    display:none}
+  .slide.on{display:block}
+  .glow{position:absolute;width:900px;height:900px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(42,139,208,.34),transparent 68%)}
+  .glow.a{right:-320px;top:-360px}
+  .glow.b{left:-340px;bottom:-380px;background:radial-gradient(circle,rgba(242,101,27,.16),transparent 68%)}
+
+  /* 品牌条 */
+  .bar{position:absolute;left:80px;right:80px;top:96px;display:flex;align-items:center;gap:26px;z-index:3}
+  .mark{width:96px;height:96px;border-radius:24px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .mark svg{width:52px;height:52px;stroke:#fff;fill:none;stroke-width:1.6}
+  .bname{font-size:46px;font-weight:800;letter-spacing:1.5px;line-height:1.15}
+  .bsub{font-size:26px;color:rgba(255,255,255,.62);margin-top:8px;letter-spacing:1px}
+
+  /* 满屏照片 */
+  .bgimg{position:absolute;inset:0}
+  .bgimg img{width:100%;height:100%;object-fit:cover;display:block}
+  .scrim{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(4,26,44,.72) 0%,rgba(4,26,44,.18) 30%,rgba(4,26,44,.62) 62%,#062a45 92%)}
+
+  /* 开场 */
+  .hero-txt{position:absolute;left:80px;right:80px;bottom:220px;z-index:3}
+  .kicker{display:inline-block;font-size:26px;letter-spacing:4px;color:#8fc6ea;
+    border:1px solid rgba(143,198,234,.5);border-radius:100px;padding:10px 24px;margin-bottom:34px}
+  .h1{font-size:88px;line-height:1.32;font-weight:800;letter-spacing:2px}
+  .h1 em{font-style:normal;color:#ffbe8c}
+  .h1small{font-size:64px}
+  .tags{display:flex;flex-wrap:wrap;gap:16px;margin-top:44px}
+  .tags span{font-size:30px;font-weight:700;padding:14px 28px;border-radius:100px;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26)}
+
+  /* 四项服务 */
+  .mid{position:absolute;left:80px;right:80px;top:360px;z-index:3}
+  .stitle{font-size:82px;font-weight:800;line-height:1.3;letter-spacing:2px}
+  .stitle em{font-style:normal;color:#ffbe8c}
+  .sdesc{font-size:30px;line-height:1.7;color:rgba(255,255,255,.72);margin-top:26px}
+  .list{margin-top:64px}
+  .item{display:flex;align-items:flex-start;gap:30px;padding:62px 0;border-top:1px solid rgba(255,255,255,.16)}
+  .item:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+  .no{font-size:30px;font-weight:800;color:#7fb6da;letter-spacing:2px;flex:0 0 62px;padding-top:8px}
+  .item h3{font-size:44px;font-weight:800;letter-spacing:1px}
+  .item p{font-size:27px;color:rgba(255,255,255,.66);margin-top:10px;line-height:1.6}
+
+  /* 承诺页 */
+  .ptxt{position:absolute;left:80px;right:80px;bottom:170px;z-index:3}
+  .pno{font-size:150px;font-weight:800;line-height:1;color:rgba(255,255,255,.18);letter-spacing:4px}
+  .ptitle{font-size:96px;font-weight:800;letter-spacing:3px;margin-top:-38px}
+  .plead{font-size:42px;font-weight:700;color:#ffbe8c;line-height:1.55;margin-top:30px}
+  .pbody{font-size:31px;line-height:1.85;color:rgba(255,255,255,.82);margin-top:26px}
+
+  /* 三图 */
+  .grid3{position:absolute;left:80px;right:80px;top:480px;display:flex;gap:18px}
+  .grid3 figure{flex:1;margin:0;border-radius:20px;overflow:hidden;position:relative;
+    border:1px solid rgba(255,255,255,.18)}
+  .grid3 img{width:100%;height:800px;object-fit:cover;display:block}
+  .grid3 figcaption{position:absolute;left:0;right:0;bottom:0;padding:80px 18px 20px;font-size:26px;
+    font-weight:700;background:linear-gradient(180deg,transparent,rgba(4,20,34,.9))}
+
+  /* 联系 */
+  .ct{position:absolute;left:80px;right:80px;top:330px;z-index:3}
+  .ct h2{font-size:88px;font-weight:800;letter-spacing:2px;line-height:1.3}
+  .ct h2 em{font-style:normal;color:#ffbe8c}
+  .persons{margin-top:64px;display:flex;flex-direction:column;gap:34px}
+  .prow{display:flex;align-items:baseline;gap:26px}
+  .prow em{font-style:normal;font-size:38px;color:rgba(255,255,255,.78);flex:0 0 150px}
+  .prow b{font-size:80px;font-weight:800;letter-spacing:2px;color:#ffb27a;line-height:1.1;
+    font-variant-numeric:tabular-nums}
+  .qrs{display:flex;gap:44px;margin-top:66px}
+  .qrs figure{margin:0;width:268px;text-align:center}
+  .qrs img{width:268px;height:268px;background:#fff;padding:12px;border-radius:22px;display:block}
+  .qrs figcaption{font-size:26px;color:rgba(255,255,255,.72);margin-top:16px;letter-spacing:1px}
+  .footline{position:absolute;left:80px;right:80px;bottom:96px;z-index:3;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:26px;color:rgba(255,255,255,.6);letter-spacing:1px;padding-top:26px;
+    border-top:1px solid rgba(255,255,255,.16)}
+  .footline b{color:#fff;font-weight:700}
+
+  /* 透明叠加层 */
+  body.ovmode{background:#062a45}
+  .slide.ov{background:transparent}
+  .ovscrim{position:absolute;inset:0;background:linear-gradient(168deg,#0d4574 0%,#083453 46%,#062a45 100%)}
+  .ovtxt{position:absolute;left:80px;right:80px;top:760px;z-index:3}
+  .play{position:absolute;left:80px;top:430px;width:150px;height:150px;border-radius:50%;
+    background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.4);display:flex;
+    align-items:center;justify-content:center;z-index:3}
+  .play::after{content:"";width:0;height:0;margin-left:12px;
+    border-left:52px solid #fff;border-top:32px solid transparent;border-bottom:32px solid transparent}
+  .ovnote{font-size:29px;color:rgba(255,255,255,.78);margin-top:26px;letter-spacing:.5px}
+  .ovlist{margin-top:70px;display:flex;flex-direction:column;gap:26px}
+  .ovlist div{font-size:34px;color:rgba(255,255,255,.9);display:flex;align-items:center;gap:20px}
+  .ovlist b{color:#ffbe8c;font-weight:800}
+  /* 三承诺并列 */
+  .tri{margin-top:70px;display:flex;flex-direction:column;gap:0}
+  .tri .row2{display:flex;align-items:center;gap:28px;padding:44px 0;border-top:1px solid rgba(255,255,255,.16)}
+  .tri .row2:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+  .tri .ic{width:92px;height:92px;border-radius:24px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3)}
+  .tri .ic svg{width:46px;height:46px;stroke:#ffbe8c;fill:none;stroke-width:1.8}
+  .tri h3{font-size:52px;font-weight:800;letter-spacing:1px}
+  .tri p{font-size:28px;color:rgba(255,255,255,.68);margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- 1 开场 -->
+<section class="slide" id="s1">
+  <div class="bgimg"><img src="../assets/img/works/w00-lead.webp" alt=""></div>
+  <div class="scrim"></div>
+  <div class="bar">
+    <div class="mark"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg></div>
+    <div><div class="bname">九原吉祥门窗服务</div><div class="bsub">包头市九原区 · 本地专业老师傅直营</div></div>
+  </div>
+  <div class="hero-txt">
+    <span class="kicker">包头九原 · 没有中间商</span>
+    <div class="h1">门窗的事<br>找本地师傅<em>一次办妥</em></div>
+    <div class="tags">
+      <span>没有中间商</span><span>质量保证</span><span>本地专业老师傅</span>
+    </div>
+  </div>
+  <div class="footline"><span><b>包头市九原区</b> · 就近上门</span><span>吉继山 15147291185 · 刘红侠 18247359113</span></div>
+</section>
+
+<!-- 2 四项服务 -->
+<section class="slide" id="s2">
+  <div class="glow a"></div><div class="glow b"></div>
+  <div class="bar">
+    <div class="mark"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg></div>
+    <div><div class="bname">九原吉祥门窗服务</div><div class="bsub">包头市九原区 · 本地专业老师傅直营</div></div>
+  </div>
+  <div class="mid">
+    <div class="stitle">我们就干<em>这四件事</em></div>
+    <div class="sdesc">装新窗、配纱窗、修漏风、换玻璃。都是门窗上的活，做完就走，不推销别的。</div>
+    <div class="list">
+      <div class="item"><span class="no">01</span><div><h3>断桥铝门窗安装</h3><p>新房装窗、旧窗换新，量尺、找正、打发泡、内外打胶</p></div></div>
+      <div class="item"><span class="no">02</span><div><h3>金刚纱窗定制</h3><p>平开、推拉、内开内倒都能配，防盗防蚊，网破了也能单换</p></div></div>
+      <div class="item"><span class="no">03</span><div><h3>窗户漏风维修</h3><p>胶条老化、锁点松动、框墙缝开裂、窗扇下垂，先找漏点再动手</p></div></div>
+      <div class="item"><span class="no">04</span><div><h3>更换漏气玻璃</h3><p>中空玻璃起雾进水珠，按原尺寸重做一块换上，不用换整窗</p></div></div>
+    </div>
+  </div>
+  <div class="footline"><span><b>先量尺</b> · 先报价 · 后施工</span><span>包头市九原区 · 就近上门</span></div>
+</section>
+
+<!-- 3 没有中间商 -->
+<section class="slide" id="s3">
+  <div class="bgimg"><img src="../assets/img/works/w02-old-opening.webp" alt=""></div>
+  <div class="scrim"></div>
+  <div class="ptxt">
+    <div class="pno">01</div>
+    <div class="ptitle">没有中间商</div>
+    <div class="plead">电话就是干活师傅本人接</div>
+    <div class="pbody">不设门店、不养业务员、不挂派单平台，也不把活转包给临时工。量尺、报价、安装、售后，全程同一个人。</div>
+  </div>
+</section>
+
+<!-- 4 质量保证 -->
+<section class="slide" id="s4">
+  <div class="bgimg"><img src="../assets/img/works/w03-level.webp" alt=""></div>
+  <div class="scrim"></div>
+  <div class="ptxt">
+    <div class="pno">02</div>
+    <div class="ptitle">质量保证</div>
+    <div class="plead">材料当场验，工序不省步</div>
+    <div class="pbody">型材、玻璃、五金按报价单配置进场，您可以当场看；找正、发泡、打胶、排水一步不落。装完逐项试给您看，您点头才算完。</div>
+  </div>
+</section>
+
+<!-- 5 本地老师傅 -->
+<section class="slide" id="s5">
+  <div class="bgimg"><img src="../assets/img/works/w06-seal.webp" alt=""></div>
+  <div class="scrim"></div>
+  <div class="ptxt">
+    <div class="pno">03</div>
+    <div class="ptitle">本地老师傅</div>
+    <div class="plead">九原住、九原干，售后找得到人</div>
+    <div class="pbody">路熟、到得快，约好时间不用在家等一整天。先查毛病再报价，能调不换、能补不换整窗，不劝您花冤枉钱。</div>
+  </div>
+</section>
+
+<!-- 6 完工实拍 -->
+<section class="slide" id="s6">
+  <div class="glow a"></div><div class="glow b"></div>
+  <div class="bar">
+    <div class="mark"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg></div>
+    <div><div class="bname">九原吉祥门窗服务</div><div class="bsub">包头市九原区 · 本地专业老师傅直营</div></div>
+  </div>
+  <div class="grid3">
+    <figure><img src="../assets/img/works/w07-double.webp" alt=""><figcaption>双扇窗换好了</figcaption></figure>
+    <figure><img src="../assets/img/works/w09-living.webp" alt=""><figcaption>客厅大窗完工</figcaption></figure>
+    <figure><img src="../assets/img/works/w12-dark.webp" alt=""><figcaption>收尾清场</figcaption></figure>
+  </div>
+  <div class="mid" style="top:1370px">
+    <div class="stitle h1small">这些<em>不是效果图</em></div>
+    <div class="sdesc">是干活时随手拍的。窗框怎么拉进门、旧窗怎么拆、框子怎么找正、胶怎么打，都在里面。</div>
+  </div>
+</section>
+
+<!-- 7 联系 -->
+<section class="slide" id="s7">
+  <div class="glow a"></div><div class="glow b"></div>
+  <div class="bar">
+    <div class="mark"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg></div>
+    <div><div class="bname">九原吉祥门窗服务</div><div class="bsub">包头市九原区 · 本地专业老师傅直营</div></div>
+  </div>
+  <div class="ct">
+    <h2>一个电话<br><em>师傅上门</em></h2>
+    <div class="persons">
+      <div class="prow"><em>吉继山</em><b>15147291185</b></div>
+      <div class="prow"><em>刘红侠</em><b>18247359113</b></div>
+    </div>
+    <div class="qrs">
+      <figure><img src="../assets/img/qr/wx-jijishan.png" alt="吉继山微信二维码"><figcaption>吉继山 · 微信</figcaption></figure>
+      <figure><img src="../assets/img/qr/wx-liuhongxia.png" alt="刘红侠微信二维码"><figcaption>刘红侠 · 微信</figcaption></figure>
+    </div>
+  </div>
+  <div class="footline"><span><b>包头市九原区</b> · 就近上门</span><span>没有中间商 · 质量保证 · 本地老师傅</span></div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var n = +(new URLSearchParams(location.search).get('s') || 1);
+    var el = document.getElementById('s' + n);
+    if (el) el.classList.add('on');
+  });
+</script>
+
+<!-- 8 实拍视频字幕层（透明底，用于叠加） -->
+<section class="slide ov" id="s8">
+  <div class="ovscrim"></div>
+  <div class="bar">
+    <div class="mark"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg></div>
+    <div><div class="bname">九原吉祥门窗服务</div><div class="bsub">包头市九原区 · 本地专业老师傅直营</div></div>
+  </div>
+  <div class="play"></div>
+  <div class="ovtxt">
+    <span class="kicker">真实施工现场 · 22 秒</span>
+    <div class="h1 h1small">手机随手拍的<br><em>不是摆拍</em></div>
+    <div class="ovnote">抬玻璃、装窗扇、框周打胶，全程当着业主的面做</div>
+    <div class="ovlist">
+      <div><b>①</b>抬整块玻璃进门</div>
+      <div><b>②</b>装窗扇、调五金</div>
+      <div><b>③</b>框周打胶收边</div>
+    </div>
+  </div>
+  <div class="footline"><span><b>手机随手录的</b> · 没旁白没配乐</span><span>九原吉祥门窗服务</span></div>
+</section>
+<script>
+  var n2 = +(new URLSearchParams(location.search).get("s") || 1);
+  if (n2 === 8) { document.body.classList.add("ovmode"); }
+</script>
+
+<!-- 9 三大承诺（30 秒版用） -->
+<section class="slide" id="s9">
+  <div class="glow a"></div><div class="glow b"></div>
+  <div class="bar">
+    <div class="mark"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg></div>
+    <div><div class="bname">九原吉祥门窗服务</div><div class="bsub">包头市九原区 · 本地专业老师傅直营</div></div>
+  </div>
+  <div class="mid">
+    <div class="stitle">我们的<em>三个保证</em></div>
+    <div class="tri">
+      <div class="row2">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="4" cy="12" r="2.5"/><circle cx="20" cy="12" r="2.5"/><path d="M7.5 12h9M14 8.5l2.5 3.5-2.5 3.5"/></svg></div>
+        <div><h3>没有中间商</h3><p>电话就是干活师傅本人接，不派单、不转包</p></div>
+      </div>
+      <div class="row2">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.2-2.9 7.4-7 9-4.1-1.6-7-4.8-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div><h3>质量保证</h3><p>材料当场验，工序一步不省，完工逐项试给您看</p></div>
+      </div>
+      <div class="row2">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg></div>
+        <div><h3>本地老师傅</h3><p>九原住、九原干，先查毛病再报价</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="footline"><span><b>包头市九原区</b> · 就近上门</span><span>吉继山 15147291185 · 刘红侠 18247359113</span></div>
+</section>
+</body>
+</html>
