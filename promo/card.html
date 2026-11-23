@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>九原门窗服务 · 微信服务卡</title>
+<title>九原吉祥门窗服务 · 微信服务卡</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{background:#eef2f5}
@@ -37,16 +37,20 @@
   .shots img{width:100%;height:236px;object-fit:cover;display:block}
   .shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 9px;font-size:16px;font-weight:600;color:#fff;background:linear-gradient(180deg,transparent,rgba(4,20,34,.9))}
 
-  /* 电话 */
-  .contact{margin-top:32px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:26px 26px 22px;display:flex;align-items:center;gap:24px}
-  .contact__main{flex:1}
-  .contact__hint{font-size:19px;color:rgba(255,255,255,.62);letter-spacing:.5px;margin-bottom:16px}
-  .person{display:flex;align-items:baseline;gap:14px;padding:7px 0}
+  /* 电话与微信 */
+  .contact{margin-top:32px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:24px 26px}
+  .contact__hint{font-size:19px;color:rgba(255,255,255,.62);letter-spacing:.5px;margin-bottom:10px}
+  .person{display:flex;align-items:baseline;gap:14px;padding:5px 0}
   .person em{font-style:normal;font-size:22px;color:rgba(255,255,255,.8);flex:0 0 auto}
   .person b{font-size:47px;font-weight:800;letter-spacing:1px;line-height:1.15;color:#ffb27a}
-  .contact__qr{flex:0 0 auto;text-align:center;width:132px}
-  .contact__qr img{width:132px;height:132px;background:#fff;padding:7px;border-radius:12px;display:block}
-  .contact__qr span{display:block;font-size:15px;color:rgba(255,255,255,.6);margin-top:8px;letter-spacing:.3px}
+  .wx{margin-top:18px;display:flex;align-items:center;gap:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:20px 26px}
+  .wx__text{flex:1}
+  .wx__text b{display:block;font-size:22px;font-weight:800;color:#fff;margin-bottom:7px}
+  .wx__text span{display:block;font-size:17px;color:rgba(255,255,255,.62);line-height:1.6}
+  .wx__qr{flex:0 0 auto;display:flex;gap:14px}
+  .wx__qr figure{margin:0;text-align:center;width:132px}
+  .wx__qr img{width:132px;height:132px;background:#fff;padding:6px;border-radius:12px;display:block}
+  .wx__qr figcaption{font-size:15px;color:rgba(255,255,255,.72);margin-top:7px}
 
   /* 底 */
   .foot{margin-top:28px;padding:20px 0 34px;border-top:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:space-between;font-size:18px;color:rgba(255,255,255,.62);letter-spacing:.4px}
@@ -61,7 +65,7 @@
         <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 3.5v17M3.5 12h17"/></svg>
       </div>
       <div>
-        <strong>九原门窗服务</strong>
+        <strong>九原吉祥门窗服务</strong>
         <span>包头市九原区 · 本地专业老师傅直营</span>
       </div>
     </div>
@@ -85,20 +89,25 @@
     </div>
 
     <div class="contact">
-      <div class="contact__main">
-        <div class="contact__hint">打电话，师傅直接约上门量尺</div>
-        <div class="person"><em>吉继山</em><b>15147291185</b></div>
-        <div class="person"><em>刘红侠</em><b>18247359113</b></div>
+      <div class="contact__hint">打电话，师傅直接约上门量尺</div>
+      <div class="person"><em>吉继山</em><b>15147291185</b></div>
+      <div class="person"><em>刘红侠</em><b>18247359113</b></div>
+    </div>
+
+    <div class="wx">
+      <div class="wx__text">
+        <b>不方便打电话，就加微信</b>
+        <span>长按识别二维码加师傅微信，把窗框、胶条缝、玻璃起雾的地方拍张照片发过来，师傅看一眼就知道大概是什么毛病。</span>
       </div>
-      <div class="contact__qr">
-        <img src="qr-site.png" alt="扫码看施工实拍">
-        <span>扫码看实拍</span>
+      <div class="wx__qr">
+        <figure><img src="../assets/img/qr/wx-jijishan.png" alt="吉继山微信二维码"><figcaption>吉继山 · 微信</figcaption></figure>
+        <figure><img src="../assets/img/qr/wx-liuhongxia.png" alt="刘红侠微信二维码"><figcaption>刘红侠 · 微信</figcaption></figure>
       </div>
     </div>
 
     <div class="foot">
       <span><b>包头市九原区</b> · 没有中间商 · 质量保证</span>
-      <span>存图 / 转发都行</span>
+      <span>长按识别二维码 · 存图转发都行</span>
     </div>
   </div>
 </div>

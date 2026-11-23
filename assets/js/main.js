@@ -1,4 +1,4 @@
-/* 九原门窗服务 · 交互脚本 */
+/* 九原吉祥门窗服务 · 交互脚本 */
 (function () {
   'use strict';
 
@@ -138,8 +138,11 @@
   /* ---------- 施工实拍：点击放大 + 左右切换 ---------- */
   (function () {
     var cards = Array.prototype.slice.call(document.querySelectorAll('.work-card'));
+    var qrCards = Array.prototype.slice.call(document.querySelectorAll('.qr-card'));
     var lb = document.getElementById('lb');
-    if (!cards.length || !lb) return;
+    if ((!cards.length && !qrCards.length) || !lb) return;
+
+    var group = cards;  // 当前可切换的一组图
 
     var img = document.getElementById('lbImg');
     var cap = document.getElementById('lbCap');
@@ -147,8 +150,9 @@
     var lastFocus = null;
 
     function show(i) {
-      idx = (i + cards.length) % cards.length;
-      var card = cards[idx];
+      idx = (i + group.length) % group.length;
+      var card = group[idx];
+      lb.classList.toggle('is-single', group.length < 2);
       var pic = card.querySelector('img');
       if (!pic) return;
       img.src = pic.getAttribute('src');
@@ -160,6 +164,7 @@
 
     function hide() {
       lb.classList.remove('is-open');
+      group = cards;
       document.body.style.overflow = '';
       img.removeAttribute('src');
       if (lastFocus) lastFocus.focus();
@@ -168,7 +173,17 @@
     cards.forEach(function (card, i) {
       card.addEventListener('click', function () {
         lastFocus = card;
+        group = cards;
         show(i);
+      });
+    });
+
+    /* 微信二维码：单张查看，不参与左右翻 */
+    qrCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        lastFocus = card;
+        group = qrCards;
+        show(qrCards.indexOf(card));
       });
     });
 
